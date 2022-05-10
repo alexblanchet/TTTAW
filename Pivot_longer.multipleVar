@@ -1,0 +1,16 @@
+# Pivot_longer avec plusieurs variables à stacker séparément
+
+# L'objectif était ici de mettre en long et d'aboutir avec une variable "stab_resi",
+# une "Pond" et une "Vague". Donc, stacker plusieurs variables en plusieurs colones
+
+df2.2 |> select(stab_resid_v2, stab_resid_v3, Pond_v2, Pond_v3) |>  #|> head()
+  rename(stab.resid_v2 = stab_resid_v2, stab.resid_v3 = stab_resid_v3) |> 
+  pivot_longer(cols = everything(), # ça aurait pu être !ID si j'avais inclu le ID par exemple
+               names_to = c(".value", "vague"), # .value est crucial
+               names_sep = "_") |>... # Détermine la séparation en fonction des noms de variables.  
+  
+# Le rename permet de n'Avoir que "_" comme séparateur et donc d'utiliser names_sep = "_". 
+# Autrement, il aurait fallu utiliser names_pattern =... et c'est plus complexe. Mais la possibilité existe. 
+  
+# names_to = c(".value", ... utilise le ".value" permet d'utiliser le préfice des 
+# variables pour créer le nom de la colone. Voir help de pivot_longer(), ctlr+f ".value".   
