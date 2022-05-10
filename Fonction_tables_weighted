@@ -1,0 +1,30 @@
+# Fonctions que j'ai écrit pour répéter ces trucs que je fais souvent. 
+
+tab1w <- function(y, w){
+  freq <- table(y)
+  perc <- prop.table(table(y)) * 100
+  wperc <- prop.table(Hmisc::wtd.table(y, weights = w)) * 100
+  t <- cbind(freq, perc, wperc)
+  t <- rbind(t, colSums(t))
+  colnames(t) <- c("Fréquences", "% bruts", "% pondérés")
+  #return(round(t, 2))
+  kable(t, 
+        caption = paste(var_label(y)),
+        digits = 2) |> kable_styling()
+}
+
+tab2w <- function(y, x, w){
+  freq <- table(y, x)
+  wperc <- prop.table(questionr::wtd.table(y, x, weights = w), 2) * 100 # ne fonctionne pas avec Hmisc, 
+  t <- cbind(freq, wperc)
+  t <- rbind(t, colSums(t))
+#  colnames(t) <- c("Fréquences","% pondérés")
+kable(t, 
+      caption = paste(var_label(y), "par", var_label(x) ),
+      digits=2) %>% 
+  add_header_above(c(" ", "Fréquences" = nlevels(x), 
+                     "Pourcentages pondérés" = nlevels(x))) %>%
+  kable_styling() 
+}
+
+# On peut remplacer kable()... pas retunr(t) pour créer un objet simple en base R. Le kable() crée un tableau bien formaté. 
