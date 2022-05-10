@@ -11,3 +11,17 @@ df[, c( "E1", "E2", "E3", "E4", "E5")] <- lapply(
 m13.list <- c("M13_A_v2", "M13_B_v2", "M13_C_v2", "M13_D_v2", "M13_E_v2", "M13_F_v2", "M13_G_v2", "M13_H_v2")
 m13.listd <- c("M13_A_v2.d", "M13_B_v2.d", "M13_C_v2.d", "M13_D_v2.d", "M13_E_v2.d", "M13_F_v2.d", "M13_G_v2.d", "M13_H_v2.d")
 df2[, m13.listd] <- ifelse(df2[,  m13.list] == "Entièrement d’accord" | df2[,  m13.list] == "D’accord", 1, 0)
+
+
+# -----------------------------------------Créer nouvelle variable de facteur qui réduit un grand nombre de factor levels.
+# Créé l'objet A$religion qui aura 3 modalités ("Agnostic & Atheist, No rel", "Christian", "Non Christian") à partir
+# d'une multitude de catégories.
+
+A$religion[A$Q306 %in% c("Agnostic", "Atheist", 
+                         "No religious affiliation", "Humanist")] <- "Agnostic & Atheist, No rel"
+A$religion[A$Q306 %in% c("Baptist", "Christian Orthodox",
+                         "Pentecostal", "United Church",
+                         "Anglican", "Other Christian", "Presbyterian",
+                         "Catholic", "Lutheran")] <- "Christian"
+A$religion[A$Q306 %in% c("Islam", "Buddhist", "Hindu", "Judaism",
+                         "Other religion", "Sikh")] <- "Non Christian"
