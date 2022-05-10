@@ -1,0 +1,13 @@
+# -------------------------------------------------- ifelse multiples variables 
+# Ceci créé des variables E1 à E5 en recodant à partir de E1r1 à E5r1
+
+df[, c( "E1", "E2", "E3", "E4", "E5")] <- lapply(
+  df[, c( "E1r1", "E2r1", "E3r1", "E4r1", "E5r1")],
+  FUN = function(y){ifelse(y > 100, 100, y)}) 
+
+# -------------------------------------------------- dummies multiples variables
+# Ceci créé les objets m13.list et m13.listd, puis créé des variables dummies dans m13.list en fonction de recodification de m13.list
+
+m13.list <- c("M13_A_v2", "M13_B_v2", "M13_C_v2", "M13_D_v2", "M13_E_v2", "M13_F_v2", "M13_G_v2", "M13_H_v2")
+m13.listd <- c("M13_A_v2.d", "M13_B_v2.d", "M13_C_v2.d", "M13_D_v2.d", "M13_E_v2.d", "M13_F_v2.d", "M13_G_v2.d", "M13_H_v2.d")
+df2[, m13.listd] <- ifelse(df2[,  m13.list] == "Entièrement d’accord" | df2[,  m13.list] == "D’accord", 1, 0)
