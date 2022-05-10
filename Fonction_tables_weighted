@@ -1,5 +1,8 @@
 # Fonctions que j'ai écrit pour répéter ces trucs que je fais souvent. 
 
+# Dans tous les cas, les fonctions prennent un argument y et w, y étant la variable focale et w la variable de pondération.
+# La fonction tab2w croise avec x et prend donc un argument x.  
+
 tab1w <- function(y, w){
   freq <- table(y)
   perc <- prop.table(table(y)) * 100
