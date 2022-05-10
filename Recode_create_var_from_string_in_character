@@ -1,0 +1,11 @@
+# Variable character A$value contenait les sélections multiples sous forme de texte pour chaque i. 
+# Genre : "For public school teachers, For public school students, In none of these cases".
+# Je voulais séparer ces strings pour avoir des variables qui identifient si oui ou non la string était dans A$value
+# et donc si l'item avait étésélectionné.
+
+A$Authority <- grepl("For government officials in positions of authority (e.g. judges, police)", A$value, fixed = TRUE)
+A$Citizenship <- grepl("For participants in the Canadian citizenship ceremony", A$value, fixed = TRUE)  
+A$Teachers <- grepl("For public school teachers", A$value, fixed = TRUE)  
+A$Students <- grepl("For public school students", A$value, fixed = TRUE) 
+A$Public <- grepl("For those in all public spaces (e.g. on sidewalks, in public parks)", A$value, fixed = TRUE) 
+A$None <- grepl("In none of these cases", A$value, fixed = TRUE) 
