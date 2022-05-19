@@ -1,6 +1,4 @@
 # TTTAW
 That Thing Took A While
 
-Ce répertoire regroupe des bouts de codes pour des trucs qui m'ont pris du temps à faire et que je suis suceptible de refaire souvent.
-J'aurais dû commencer ça il y a des années, mais je ne l'ai pas fait et maintenant je suis tanné de fouiller dans mes codes éparpillés 
-pour des solutions à des problèmes que j'ai déjà rencontré. Je vrais progressivement ajouter ici des solutions à mesure que je dois les utiliser.
+This directory is a collection of code snippets for stuff that took some time to come up with or just stuff that I keep forgetting. I should have started this years ago, but I didn't and now I'm tired of digging through my scattered codes for solutions to problems I've already encountered. I'll gradually add solutions here as I need to use them.
