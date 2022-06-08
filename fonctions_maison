@@ -1,0 +1,63 @@
+# Programmation des fonctions "maisons"
+
+# variable catégorique
+xtab.cat  <- function(y_var, x_var) {       
+  perc <- prop.table(table(y_var)) * 100                  
+  percX <- prop.table(table(y_var, x_var), 2)*100
+  t <- cbind("Pourcentage global" = perc, percX)
+  t <- rbind(t, "Total" = round(colSums(t), 2)) 
+  return(t)  
+}
+
+# variable continue
+xtab.conti <- function(y_var, x_var) {       
+  mean <- mean(y_var)                  
+  meanX <- t(tapply(y_var, x_var, FUN = mean))
+  t <- cbind("Moyenne globale" = mean, meanX)
+  return(t)  
+}
+
+tab.alex  <- function(x, y) {       
+  freq <- table(x)                  
+  perc <- prop.table(table(x))*100
+  t <- cbind("Fréquence" = freq, "Pourcentage" = perc)
+  t <- t[order(-perc),] # ordonnancer les choses.
+  t <- rbind(t, "Total" = colSums(t))   
+  return(t)            
+}
+
+tab.alex  <- function(x, y) {       
+  freq <- table(x)                  
+  perc <- prop.table(table(x))*100
+  xperc <- prop.table(table(x,y),2) *100
+  t <- cbind("Fréquence" = freq, "Pourcentage" = perc, "Croisé" = "xperc")
+  t <- t[order(-perc),] # ordonnancer les choses.
+  t <- rbind(t, "Total" = colSums(t))   
+  return(t)            
+}
+
+tabs.alex <- function(x){
+  t <- lapply(x, tab.alex)
+  t.att <- lapply(x, attributes)
+  names(t) <- paste(names(t), lapply(t.att, `[`, 1), sep = " ")
+  names(t) <- sub(pattern = "list(label = ", replacement = "", x = names(t), fixed=TRUE)
+  names(t) <- sub(pattern = ")", replacement = "", x = names(t), fixed=TRUE)
+  return(t)   
+}
+
+# Fonction maison
+tab.alex <- function(y, x) {
+freq <- table(y,x)
+xperc <- prop.table(table(y,x), 2) * 100
+Total <- prop.table(table(y)) * 100
+t <- cbind(freq, xperc, Total)
+t <- rbind(t, "Total" = colSums(t))
+return(
+kable(t,
+caption = paste(var_label(y), "par", var_label(x) ),
+digits=2) %>%
+add_header_above(c(" ", "Fréquences" = nlevels(x),
+"Pourcentages" = nlevels(x)+1)) %>%
+kable_styling()
+)
+}
